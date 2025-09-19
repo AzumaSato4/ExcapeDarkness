@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (player != null) return; //ゲームオーバーの時のエラー回避
+        if (player == null) return; //ゲームオーバーの時のエラー回避
 
         //目指すべきポイント
         Vector3 nextPos = new Vector3(player.transform.position.x, player.transform.position.y, -10);
