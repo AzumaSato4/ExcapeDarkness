@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 676463167966402847}
   - component: {fileID: 9126835784220565092}
+  - component: {fileID: 4896446541412599870}
   m_Layer: 0
   m_Name: Talk
   m_TagString: Untagged
@@ -203,3 +204,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &4896446541412599870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554829976142929174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4cf6a9b77288e4aa41833103bdec40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: {fileID: 11400000, guid: 0d2da9a0839d18949883b51c9dd58684, type: 2}

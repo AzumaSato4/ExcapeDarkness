@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7885473752022468700}
   - component: {fileID: 6782830850560074961}
+  - component: {fileID: 4760174977064125749}
   m_Layer: 0
   m_Name: Room
   m_TagString: Room
@@ -69,6 +70,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &4760174977064125749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907805315676059267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78338fa2dd7178e44a5cd555078fd365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomName: fromRoom1
+  nextRoomName: Room1
+  nextScene: Main
+  openedDoor: 0
+  direction: 1
+  message: {fileID: 11400000, guid: 001ce492d8580734c840d03a49b43991, type: 2}
+  door: {fileID: 9010675692725955985}
 --- !u!1 &9010675692725955985
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,6 +101,7 @@ GameObject:
   - component: {fileID: 3810806997549520430}
   - component: {fileID: 5104639193702452576}
   - component: {fileID: 3913082474584890694}
+  - component: {fileID: 6147139901518185166}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -240,3 +261,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.039364934, y: 0.02402258}
   m_Radius: 1.6407193
+--- !u!114 &6147139901518185166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010675692725955985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4927eabe08ff654c858b13ad84df364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomData: {fileID: 4760174977064125749}
