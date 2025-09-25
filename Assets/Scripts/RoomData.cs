@@ -18,10 +18,12 @@ public class RoomData : MonoBehaviour
     public MessageData message; //トークデータ
     public GameObject door; //表示/非表示対象のドア情報
 
+    public bool isSavePoint;    //セーブポイントに使われるスクリプトにするかどうか
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !isSavePoint)
         {
             ChangeScene();
         }

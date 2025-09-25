@@ -190,5 +190,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   reactionDistance: 4
-  arrangeId: 0
   onBarrier: 0

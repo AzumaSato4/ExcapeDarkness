@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rbody;
     Animator anime;
 
+    bool isViartual;    //バーチャルパッドを触っているかどうかの判断フラグ
+
+    //足音判定
+    float footstepInterval = 0.3f; //足音間隔
+    float footstepTimer; //時間計測
+
 
     void Start()
     {
@@ -35,18 +41,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //プレイ中でなければ何もしない
-        if (GameManager.gameState != GameState.playing) return;
+        if (!(GameManager.gameState == GameState.playing || GameManager.gameState == GameState.ending)) return;
 
         Move(); //上下左右の入力値の取得
         angleZ = GetAngle();    //その時の角度を変数angleZに反映
         Animation();    //angleZを利用してアニメーション
+
+        //足音
+        HandleFootsteps();
     }
 
 
     private void FixedUpdate()
     {
         //プレイ中でなければ何もしない
-        if (GameManager.gameState != GameState.playing) return;
+        if (!(GameManager.gameState == GameState.playing || GameManager.gameState == GameState.ending)) return;
         if (inDamage)
         {
             //点滅演出
@@ -76,9 +85,12 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
+        if (!isViartual)    //バーチャルパッドを触っていないのであれば
+        {
         //axisHとaxisVに入力状況を代入する
         axisH = Input.GetAxisRaw("Horizontal");
         axisV = Input.GetAxisRaw("Vertical");
+        }
     }
 
 
@@ -169,6 +181,7 @@ public class PlayerController : MonoBehaviour
         //ステータスがplayingでなければ何もせず終わり
         if (GameManager.gameState != GameState.playing) return;
 
+        SoundManager.instance.SEPlay(SEType.Damage); //ダメージを受ける音
         GameManager.playerHP--; //プレイヤーHPを1減らす
 
         if (GameManager.playerHP > 0)
@@ -213,4 +226,50 @@ public class PlayerController : MonoBehaviour
         rbody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse); //上に跳ね上げる
         Destroy(gameObject, 1.0f);  //1秒後に存在を消去
     }
+
+
+    //スポットライトの入手フラグが立っていたらライトをつける
+    public void SpotLightCheck()
+    {
+        if (GameManager.hasSpotLight) spotLight.SetActive(true);
+    }
+
+
+    //バーチャルパッドの入力に対応するメソッド
+    public void SetAxis(float virH, float virV)
+    {
+        //どちらかの引数に値が入っていればバーチャルパッドが使われた
+        if (virH != 0 || virV != 0)
+        {
+            isViartual = true;
+            axisH = virH;
+            axisV = virV;
+        }
+        else //バーチャルパッドが触られていない（引数が両方0）
+        {
+            isViartual = false;
+        }
+    }
+
+
+    //足音
+    void HandleFootsteps()
+    {
+        //プレイヤーが動いていれば
+        if (axisH != 0 || axisV != 0)
+        {
+            footstepTimer += Time.deltaTime; //時間計測
+
+            if (footstepTimer >= footstepInterval) //インターバルチェック
+            {
+                SoundManager.instance.SEPlay(SEType.Walk);
+                footstepTimer = 0;
+            }
+        }
+        else //動いていなければ時間計測リセット
+        {
+            footstepTimer = 0f;
+        }
+    }
+
 }
